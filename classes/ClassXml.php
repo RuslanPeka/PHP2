@@ -24,10 +24,14 @@ class ClassXml
 
     public function prepareStringX(string $str)
     {
-        if(!empty($str)) {
+        try {
+            if (!is_string($str)) {
+                throw new Exception('Передана не строка.');
+            }
             return $this->toXml($str);
-        } else {
-            die('Строка пуста');
+        } catch (Exception $e) {
+            echo 'Выброшено исключение: ', $e->getMessage();
+            die();
         }
     }
 }
